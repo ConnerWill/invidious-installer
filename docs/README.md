@@ -180,7 +180,7 @@ Tested and working on:
 
 **ConnerWill**
 
-**XMR**
+**[XMR](https://connerwill.com/static/img/xmr-qr-connerwill.com.png)**
 : `86tE67soBqFb5fxNGgC4HLdwZXebP42ewfBwfKyMDKvFbgA7T8p4g4T5BBNA9LNbwaVafup973w41PdvCS7bbj6gTNQpCh1`
 
 **BTC**
