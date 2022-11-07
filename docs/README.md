@@ -18,29 +18,29 @@
 
 This script is just the install option in [Invidious-Updater](https://github.com/tmiland/Invidious-Updater) - Version 2.0.0 is completely re-written and might be sourced in the future
 
-## Installation
+# Installation
 
-### Download the script:
+## Quick Installation
 
-Quick install with default options for localhost:
+Install with default options to be used on localhost
 
-With Curl:
 ```shell
 curl -sSL "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh" | bash || exit 0
 ```
 
-With Wget:
+<details>
+  <summary>Download with wget and pipe to bash</summary>
+
 ```shell
 wget -qO - "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh" | bash || exit 0
 ```
+  
+</details>
 
-With custom options:
+## Customized Installation
+
 ```shell
 curl -sSL "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh"
-```
-
-Set execute permission:
-```shell
 chmod +x invidious_installer.sh
 ```
 
