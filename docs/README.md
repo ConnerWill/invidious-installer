@@ -167,7 +167,10 @@ Tested and working on:
 
 ## Donations ₿
 
-**tmiland**
+---
+
+<a href="https://github.com/tmiland"><b>tmiland</b></a>
+<a href="https://github.com/tmiland"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a>
 
 **BTC**
 : `33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM`
@@ -176,15 +179,16 @@ Tested and working on:
 
 **[Buy Me a Coffee](https://www.buymeacoffee.com/tmiland)**
 
+<b>BTC</b><code>33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM</code>
+
+
 ---
 
-**ConnerWill**
-
-
+<a href="https://github.com/ConnerWill"><b>ConnerWill</b></a>
 <a href="https://connerwill.com/static/img/xmr-qr-connerwill.com.png"><img src="https://connerwill.com/static/img/xmr.svg" alt="Monero (XMR) icon and wallet QR code" width="2%" height="2%"></a>
+<a href="https://connerwill.com"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a>
 
-
-: **[XMR](https://connerwill.com/static/img/xmr-qr-connerwill.com.png)**
+**[XMR](https://connerwill.com/static/img/xmr-qr-connerwill.com.png)**
 : `86tE67soBqFb5fxNGgC4HLdwZXebP42ewfBwfKyMDKvFbgA7T8p4g4T5BBNA9LNbwaVafup973w41PdvCS7bbj6gTNQpCh1`
 
 **BTC**
