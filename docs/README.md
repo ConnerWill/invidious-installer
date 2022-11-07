@@ -78,7 +78,7 @@ SWAP_OPTIONS=n \
 - For verbose output, use [ -v ] argument
 - Use a custom invidious repo/fork with [ -r | --repo user/invidious ]
 - installation log in invidious_installer.log
-- [./src/slib.sh](/src/slib.sh) function script is sourced remotely if not found locally
+- [slib.sh](/src/slib.sh) function script is sourced remotely if not found locally
   - This script is a combination of functions for spinners, colors and logging
     - Source: Spinner: [swelljoe/spinner](https://github.com/swelljoe/spinner)
     - Source: Run ok: [swelljoe/run_ok](https://github.com/swelljoe/run_ok)
