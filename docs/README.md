@@ -2,7 +2,7 @@
   
 [![invidious-installer Image](https://raw.githubusercontent.com/tmiland/invidious-installer/main/_images/invidious_installer.png)](https://github.com/tmiland/invidious-installer/blob/main/_images/invidious_installer.png)
 
-# invidious-installer
+# Invidious-Installer
 > *Automatic install script for [Invidious](https://github.com/iv-org/invidious)*
   
 [![GitHub release](https://img.shields.io/github/release/tmiland/invidious-installer.svg?style=for-the-badge)](https://github.com/tmiland/invidious-installer/releases)
