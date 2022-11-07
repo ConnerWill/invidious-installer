@@ -88,7 +88,7 @@ SWAP_OPTIONS=n \
 
 If root password is not set, type:
 
-```bash
+```shell
 sudo passwd root
 ```
 
