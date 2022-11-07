@@ -1,7 +1,17 @@
-# invidious-installer
-Automatic install script for Invidious
-
 <div align="center">
+  
+[![invidious-installer Image](https://raw.githubusercontent.com/tmiland/invidious-installer/main/_images/invidious_installer.png)](https://github.com/tmiland/invidious-installer/blob/main/_images/invidious_installer.png)
+
+# invidious-installer
+> *Automatic install script for [Invidious](https://github.com/iv-org/invidious)*
+  
+[![GitHub release](https://img.shields.io/github/release/tmiland/invidious-installer.svg?style=for-the-badge)](https://github.com/tmiland/invidious-installer/releases)
+[![licence](https://img.shields.io/github/license/tmiland/invidious-installer.svg?style=for-the-badge)](https://github.com/tmiland/invidious-installer/blob/master/LICENSE)
+![Bash](https://img.shields.io/badge/Language-SH-4EAA25.svg?style=for-the-badge)
+
+</div>
+
+---
 
 ```
 ╔════════════════════════════════════════════╗
@@ -10,23 +20,7 @@ Automatic install script for Invidious
 ║              Maintained by @tmiland               ║
 ╚════════════════════════════════════════════╝
 ```
-</div>
 
-<div align="center">
-
-[![GitHub release](https://img.shields.io/github/release/tmiland/invidious-installer.svg?style=for-the-badge)](https://github.com/tmiland/invidious-installer/releases)
-[![licence](https://img.shields.io/github/license/tmiland/invidious-installer.svg?style=for-the-badge)](https://github.com/tmiland/invidious-installer/blob/master/LICENSE)
-![Bash](https://img.shields.io/badge/Language-SH-4EAA25.svg?style=for-the-badge)
-
-</div>
-
-<div align="center">
-
-> Script to install [Invidious](https://github.com/iv-org/invidious)
-
-</div>
-
----
 
 # Overview
 
@@ -34,7 +28,6 @@ This script is just the install option in [Invidious-Updater](https://github.com
 
 ## Installation
 
-[![invidious-installer Image](https://raw.githubusercontent.com/tmiland/invidious-installer/main/_images/invidious_installer.png)](https://github.com/tmiland/invidious-installer/blob/main/_images/invidious_installer.png)
 
 ### Download the script:
 
