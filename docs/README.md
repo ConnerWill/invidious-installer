@@ -169,7 +169,7 @@ Tested and working on:
 
 tmiland
 
-**BTC**
+**₿TC**
 : `33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM`
 
 **[PayPal](https://paypal.me/milanddata)*&
@@ -183,7 +183,7 @@ ConnerWill
 **XMR**
 : `86tE67soBqFb5fxNGgC4HLdwZXebP42ewfBwfKyMDKvFbgA7T8p4g4T5BBNA9LNbwaVafup973w41PdvCS7bbj6gTNQpCh1`
 
-**BTC**
+**₿TC**
 : `bc1qpg5d69n2knsete7vw7f2vqpkg4a0faq9rc6se0`
 
 ---
