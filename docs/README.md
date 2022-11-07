@@ -166,9 +166,27 @@ Tested and working on:
 - [Feature request](https://github.com/tmiland/Invidious-Updater/issues/new?assignees=tmiland&labels=enhancement&template=feature_request.md&title=Feature-request:)
 
 ## Donations
-<a href="https://www.buymeacoffee.com/tmiland" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-- [PayPal me](https://paypal.me/milanddata)
-- [BTC] : 33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM
+
+tmiland
+
+**BTC**
+: `33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM`
+
+**[PayPal](https://paypal.me/milanddata)*&
+
+**[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/tmiland)
+
+---
+
+ConnerWill
+
+**XMR**
+: `86tE67soBqFb5fxNGgC4HLdwZXebP42ewfBwfKyMDKvFbgA7T8p4g4T5BBNA9LNbwaVafup973w41PdvCS7bbj6gTNQpCh1`
+
+**BTC**
+: `bc1qpg5d69n2knsete7vw7f2vqpkg4a0faq9rc6se0`
+
+---
 
 #### Disclaimer
 
@@ -187,7 +205,7 @@ Tested and working on:
 ╔════════════════════════════════════════════╗
 ║              Invidious Installer.sh               ║
 ║       Automatic install script for Invidious      ║
-║              Maintained by @t@@@@miland               ║
+║              Maintained by @tmiland               ║
 ╚════════════════════════════════════════════╝
 ```
 
