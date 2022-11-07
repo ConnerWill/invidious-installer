@@ -29,7 +29,7 @@ Version 2.0.0 is completely re-written and might be sourced in the future
 
 ## Quick Installation
 
-Install with a default configuration which runs on localhost
+> Download with curl and run the installation script with a default configuration which runs on **localhost:3000** *(http://127.0.0.1:3000)*
 
 ```shell
 curl -sSL "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main/invidious_installer.sh" | bash || exit 0
@@ -38,6 +38,8 @@ curl -sSL "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main
 <details>
   <summary>Download with wget and pipe to bash</summary>
 
+> Download with wget and run the installation script with a default  install with a default configuration which runs on **localhost:3000** *(http://127.0.0.1:3000)*
+  
 ```shell
 wget -qO - "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main/invidious_installer.sh" | bash || exit 0
 ```
@@ -51,7 +53,7 @@ curl -sSL "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main
 chmod +x invidious_installer.sh
 ```
 
-### Install with default options to run on localhost:
+> Install with default options to run on localhost:
 
 ```console
 DOMAIN= \
