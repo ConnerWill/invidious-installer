@@ -173,12 +173,9 @@ Tested and working on:
 
 <a href="https://github.com/tmiland"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a> BTC : <code>33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM</code>
 
+<a href="https://www.buymeacoffee.com/tmiland"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="10%" height="20%">    Buy Me a Coffee</a>
+
 [PayPal](https://paypal.me/milanddata)
-
-[Buy Me a Coffee](https://www.buymeacoffee.com/tmiland)
-
-
-
 
 ---
 
