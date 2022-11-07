@@ -1,21 +1,36 @@
 # invidious-installer
 Automatic install script for Invidious
 
+<div align="center">
+
 ```
-                  ╔═══════════════════════════════════════════════════════════════════╗
-                  ║                      Invidious Installer.sh                       ║
-                  ║              Automatic install script for Invidious               ║
-                  ║                      Maintained by @tmiland                       ║
-                  ╚═══════════════════════════════════════════════════════════════════╝
+╔════════════════════════════════════════════╗
+║              Invidious Installer.sh               ║
+║       Automatic install script for Invidious      ║
+║              Maintained by @tmiland               ║
+╚════════════════════════════════════════════╝
 ```
+</div>
+
+<div align="center">
+
 [![GitHub release](https://img.shields.io/github/release/tmiland/invidious-installer.svg?style=for-the-badge)](https://github.com/tmiland/invidious-installer/releases)
 [![licence](https://img.shields.io/github/license/tmiland/invidious-installer.svg?style=for-the-badge)](https://github.com/tmiland/invidious-installer/blob/master/LICENSE)
 ![Bash](https://img.shields.io/badge/Language-SH-4EAA25.svg?style=for-the-badge)
 
-## Script to install [Invidious](https://github.com/iv-org/invidious)
+</div>
 
-This script is just the install option in [Invidious-Updater](https://github.com/tmiland/Invidious-Updater)
-  - Version 2.0.0 is completely re-written and might be sourced in the future
+<div align="center">
+
+> Script to install [Invidious](https://github.com/iv-org/invidious)
+
+</div>
+
+---
+
+# Overview
+
+This script is just the install option in [Invidious-Updater](https://github.com/tmiland/Invidious-Updater) - Version 2.0.0 is completely re-written and might be sourced in the future
 
 ## Installation
 
