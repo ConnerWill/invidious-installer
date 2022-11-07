@@ -165,30 +165,28 @@ Tested and working on:
 - [Bug report](https://github.com/tmiland/Invidious-Updater/issues/new?assignees=tmiland&labels=bug&template=bug_report.md&title=Bug-report:)
 - [Feature request](https://github.com/tmiland/Invidious-Updater/issues/new?assignees=tmiland&labels=enhancement&template=feature_request.md&title=Feature-request:)
 
-## Donations ₿
+# Donate ₿
 
 ---
 
-<a href="https://github.com/tmiland"><b>tmiland</b></a>
-<a href="https://github.com/tmiland"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a> <b>BTC</b><code>33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM</code>
+<a href="https://github.com/tmiland"><h2><b>tmiland</b></h2></a>
 
+<a href="https://github.com/tmiland"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a> BTC : <code>33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM</code>
 
-**[PayPal](https://paypal.me/milanddata)**
+[PayPal](https://paypal.me/milanddata)
 
-**[Buy Me a Coffee](https://www.buymeacoffee.com/tmiland)**
+[Buy Me a Coffee](https://www.buymeacoffee.com/tmiland)
 
 
 
 
 ---
 
-<a href="https://github.com/ConnerWill"><b>ConnerWill</b></a>
-<a href="https://connerwill.com/static/img/xmr-qr-connerwill.com.png"><img src="https://connerwill.com/static/img/xmr.svg" alt="Monero (XMR) icon and wallet QR code" width="2%" height="2%"></a>
-<a href="https://connerwill.com"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a>
+<a href="https://github.com/ConnerWill"><h2><b>ConnerWill</b></h2></a>
 
-<a href="https://connerwill.com/static/img/xmr-qr-connerwill.com.png"><img src="https://connerwill.com/static/img/xmr.svg" alt="Monero (XMR) icon and wallet QR code" width="2%" height="2%"> <b>XMR</b></a> :  <code>86tE67soBqFb5fxNGgC4HLdwZXebP42ewfBwfKyMDKvFbgA7T8p4g4T5BBNA9LNbwaVafup973w41PdvCS7bbj6gTNQpCh1</code>
+<a href="https://connerwill.com/static/img/xmr-qr-connerwill.com.png"><img src="https://connerwill.com/static/img/xmr.svg" alt="Monero (XMR) icon and wallet QR code" width="2%" height="2%"> XMR</a> :  <code>86tE67soBqFb5fxNGgC4HLdwZXebP42ewfBwfKyMDKvFbgA7T8p4g4T5BBNA9LNbwaVafup973w41PdvCS7bbj6gTNQpCh1</code>
 
-<a href="https://connerwill.com"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a> <b>BTC</b> : <code>bc1qpg5d69n2knsete7vw7f2vqpkg4a0faq9rc6se0</code>
+<a href="https://connerwill.com"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a> BTC : <code>bc1qpg5d69n2knsete7vw7f2vqpkg4a0faq9rc6se0</code>
 
 ---
 
@@ -244,3 +242,21 @@ Tested and working on:
 [docker-hub]: https://hub.docker.com/r/rl9uu6smkj/invidious-installer
 [docker-cloud-build-status]: https://img.shields.io/docker/cloud/build/rl9uu6smkj/invidious-installer
 
+<!--
+
+<a href="https://github.com/tmiland"><b>tmiland</b></a>
+<a href="https://github.com/tmiland"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a>
+
+<a href="https://github.com/tmiland"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a> <b>BTC</b><code>33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM</code>
+
+---
+
+<a href="https://github.com/ConnerWill"><b>ConnerWill</b></a>
+<a href="https://connerwill.com/static/img/xmr-qr-connerwill.com.png"><img src="https://connerwill.com/static/img/xmr.svg" alt="Monero (XMR) icon and wallet QR code" width="2%" height="2%"></a>
+<a href="https://connerwill.com"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a>
+
+<a href="https://connerwill.com/static/img/xmr-qr-connerwill.com.png"><img src="https://connerwill.com/static/img/xmr.svg" alt="Monero (XMR) icon and wallet QR code" width="2%" height="2%"> <b>XMR</b></a> :  <code>86tE67soBqFb5fxNGgC4HLdwZXebP42ewfBwfKyMDKvFbgA7T8p4g4T5BBNA9LNbwaVafup973w41PdvCS7bbj6gTNQpCh1</code>
+
+<a href="https://connerwill.com"><img src="https://connerwill.com/static/img/btc.svg" alt="Bitcoin (BTC) icon" width="2%" height="2%"></a> <b>BTC</b> : <code>bc1qpg5d69n2knsete7vw7f2vqpkg4a0faq9rc6se0</code>
+
+-->
