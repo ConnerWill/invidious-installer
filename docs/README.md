@@ -5,7 +5,7 @@
 # Invidious-Installer
 > *Automatic install script for [Invidious](https://github.com/iv-org/invidious)*
 
-[![ShellCheck Workflow Status][github-workflow-shellcheck-badge]][github-workflow-shellcheck]
+<!--[![ShellCheck Workflow Status][github-workflow-shellcheck-badge]][github-workflow-shellcheck]-->
 [![License][license]][license-file]
 [![GitHub top language][github-top-language]][invidious-installer]
 [![GitHub language count][github-language-count]][invidious-installer]
