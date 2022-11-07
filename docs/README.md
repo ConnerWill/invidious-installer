@@ -109,6 +109,8 @@ This is by no means a complete list of options; to see all configuration options
 
 Configuration options with empty values are unset by default
 
+---
+
 IP
 : localhost
 
@@ -133,6 +135,7 @@ ADMINS
 SWAP_OPTIONS
 : n
 
+---
 
 ### To keep Invidious up-to-date: [Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)
 
