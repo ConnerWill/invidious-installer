@@ -174,7 +174,7 @@ tmiland
 
 **[PayPal](https://paypal.me/milanddata)*&
 
-**[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/tmiland)
+**[Buy Me a Coffee](https://www.buymeacoffee.com/tmiland)**
 
 ---
 
@@ -200,6 +200,8 @@ ConnerWill
 
 
 <div align="center">
+  
+[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/tmiland)
 
 ```
 ╔════════════════════════════════════════════╗
