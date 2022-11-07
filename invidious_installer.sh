@@ -232,7 +232,12 @@ if [[ -f /etc/debian_version ]]; then
 elif [[ -f /etc/redhat-release ]]; then
   DISTRO=$(cat /etc/redhat-release)
 elif [[ -f /etc/os-release ]]; then
-  DISTRO=$(cat < /etc/os-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/["]//g' | awk '{print $1}')
+  DISTRO=$(cat < /etc/os-release      \
+            | grep "PRETTY_NAME"      \
+            | sed 's/PRETTY_NAME=//g' \
+            | sed 's/["]//g'          \
+            | awk '{print $1}'        \
+          )
 fi
 
 case "$DISTRO" in
@@ -396,7 +401,7 @@ fi
 chk_permissions() {
 
   if [[ $EUID -ne 0 ]]; then
-  	echo -e "Sorry, you need to run this as root"
+  	printf "Sorry, you need to run this as root"
   	exit 1
   fi
 
