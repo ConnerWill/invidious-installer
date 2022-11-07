@@ -21,7 +21,7 @@
 
 # Overview
 
-This script is just the install option in [Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)
+This script is a new and improved version of the Invidious installer option in [Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)
 : Version 2.0.0 is completely re-written and might be sourced in the future
 
 # Installation
