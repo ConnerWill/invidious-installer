@@ -40,6 +40,7 @@ if which 'tput' > /dev/null; then
       MAGENTA=$(tput setaf 5)
       CYAN=$(tput setaf 6)
       WHITE=$(tput setaf 7)
+
       REDBG=$(tput setab 1)
       GREENBG=$(tput setab 2)
       YELLOWBG=$(tput setab 3)

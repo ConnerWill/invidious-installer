@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2059,SC1091,SC2166,SC2015,SC2129,SC2221,SC2222
+ls
+#shellcheck disable=2059,1091,2166,2015,2129,2221,2222,2140,2046,2034
+#shellcheck source=./src/slib.sh
 
 ## Author: Tommy Miland (@tmiland) - Copyright (c) 2022
-
 
 ######################################################################
 ####                   Invidious Installer.sh                     ####
@@ -10,8 +11,9 @@
 ####                 Script to install Invidious                  ####
 ####                   Maintained by @tmiland                     ####
 ######################################################################
-
+## 13
 VERSION='2.0.1' # Must stay on line 14 for updater to fetch the numbers
+## 15
 
 #------------------------------------------------------------------------------#
 #
@@ -38,6 +40,7 @@ VERSION='2.0.1' # Must stay on line 14 for updater to fetch the numbers
 # SOFTWARE.
 #
 #------------------------------------------------------------------------------#
+
 ## Uncomment for debugging purpose
 #set -o errexit
 #set -o pipefail
@@ -45,64 +48,41 @@ VERSION='2.0.1' # Must stay on line 14 for updater to fetch the numbers
 #set -o xtrace
 #timestamp
 # time_stamp=$(date)
+
 # Detect absolute and full path as well as filename of this script
 cd "$(dirname "$0")" || exit
 CURRDIR=$(pwd)
 #SCRIPT_FILENAME=$(basename "$0")
 cd - > /dev/null || exit
 sfp=$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null || greadlink -f "${BASH_SOURCE[0]}" 2>/dev/null)
-if [ -z "$sfp" ]; then sfp=${BASH_SOURCE[0]}; fi
+[[ -z "$sfp" ]] && sfp=${BASH_SOURCE[0]}
+
 #SCRIPT_DIR=$(dirname "${sfp}")
-# Icons used for printing
-ARROW='➜'
-#WARNING='⚠'
-# Repo name
-REPO_NAME="tmiland/invidious-installer"
-# Invidious repo name
-IN_REPO=${IN_REPO:-iv-org/invidious}
-# Set username
-USER_NAME=invidious
-# Set userdir
-USER_DIR="/home/invidious"
-# Set repo Dir
-REPO_DIR=$USER_DIR/invidious
-# Set config file path
-IN_CONFIG=${REPO_DIR}/config/config.yml
-# Service name
-SERVICE_NAME=invidious.service
-# Default branch
-IN_BRANCH=master
-# Default domain
-DOMAIN=${DOMAIN:-}
-# Default ip
-IP=${IP:-localhost}
-# Default port
-PORT=${PORT:-3000}
-# Default dbname
-PSQLDB=${PSQLDB:-invidious}
-# Generate db password
-PSSQLPASS_GEN=$(openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-# Default dbpass (generated)
-PSQLPASS=${PSQLPASS:-$PSSQLPASS_GEN}
-# Default https only
-HTTPS_ONLY=${HTTPS_ONLY:-n}
-# Default external port
-EXTERNAL_PORT=${EXTERNAL_PORT:-}
-# Default admins
-ADMINS=${ADMINS:-}
-# Default Captcha Key
-CAPTCHA_KEY=${CAPTCHA_KEY:-}
-# Default Swap option
-SWAP_OPTIONS=${SWAP_OPTIONS:-n}
-# Logfile
-LOGFILE=$CURRDIR/invidious_installer.log
-# Console output level; ignore debug level messages.
-VERBOSE=0
-#
-BANNERS=1
+ARROW='➜' #WARNING='⚠'                    # Icons used for printing
+REPO_NAME="tmiland/invidious-installer"   # Repo name
+IN_REPO=${IN_REPO:-iv-org/invidious}      # Invidious repo name
+USER_NAME=invidious                       # Set username
+USER_DIR="/home/invidious"                # Set userdir
+REPO_DIR=$USER_DIR/invidious              # Set repo Dir
+IN_CONFIG=${REPO_DIR}/config/config.yml   # Set config file path
+SERVICE_NAME=invidious.service            # Service name
+IN_BRANCH=master                          # Default branch
+DOMAIN=${DOMAIN:-}                        # Default domain
+IP=${IP:-localhost}                       # Default ip
+PORT=${PORT:-3000}                        # Default port
+PSQLDB=${PSQLDB:-invidious}               # Default dbname
+PSSQLPASS_GEN=$(openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1) # Generate db password
+PSQLPASS=${PSQLPASS:-$PSSQLPASS_GEN}      # Default dbpass (generated)
+HTTPS_ONLY=${HTTPS_ONLY:-n}               # Default https only
+EXTERNAL_PORT=${EXTERNAL_PORT:-}          # Default external port
+ADMINS=${ADMINS:-}                        # Default admins
+CAPTCHA_KEY=${CAPTCHA_KEY:-}              # Default Captcha Key
+SWAP_OPTIONS=${SWAP_OPTIONS:-n}           # Default Swap option
+LOGFILE=$CURRDIR/invidious_installer.log  # Logfile
+VERBOSE=0                                 # Console output level; ignore debug level messages.
+BANNERS=1                                 # Enable banners
 
 usage() {
-  # shellcheck disable=SC2046
   printf "Usage: %s %s [options]\\n" "${CYAN}" $(basename "$0")
   echo
   echo "  If called without arguments, installs Invidious."
@@ -159,10 +139,8 @@ if [[ -f ./src/slib.sh ]]; then
 else
   SLIB_URL=https://raw.githubusercontent.com/tmiland/invidious-installer/main/src/slib.sh
   if [[ $(command -v 'curl') ]]; then
-    # shellcheck source=$SLIB_URL
     source <(curl -sSLf $SLIB_URL)
   elif [[ $(command -v 'wget') ]]; then
-    # shellcheck source=$SLIB_URL
     . <(wget -qO - $SLIB_URL)
   else
     echo -e "${RED}${BALLOT_X} This script requires curl or wget.\nProcess aborted${NORMAL}"
@@ -170,27 +148,17 @@ else
   fi
 fi
 
-# Setup slog
-# shellcheck disable=SC2034
-LOG_PATH="$LOGFILE"
-# Setup run_ok
-# shellcheck disable=SC2034
-RUN_LOG="$LOGFILE"
-# Exit on any failure during shell stage
-# shellcheck disable=SC2034
-RUN_ERRORS_FATAL=1
+LOG_PATH="${LOGFILE}"  # Setup slog
+RUN_LOG="${LOGFILE}"  # Setup run_ok
+RUN_ERRORS_FATAL=1  # Exit on any failure during shell stage
 
 # Console output level; ignore debug level messages.
-if [ "$VERBOSE" = "1" ]; then
-  # shellcheck disable=SC2034
+if [[ "$VERBOSE" = "1" ]]; then
   LOG_LEVEL_STDOUT="DEBUG"
 else
-  # shellcheck disable=SC2034
   LOG_LEVEL_STDOUT="INFO"
 fi
-# Log file output level; catch literally everything.
-# shellcheck disable=SC2034
-LOG_LEVEL_LOG="DEBUG"
+LOG_LEVEL_LOG="DEBUG"  # Log file output level; catch literally everything.
 
 # log_fatal calls log_error
 log_fatal() {
@@ -202,7 +170,7 @@ fatal() {
   log_fatal "Fatal Error Occurred: $1"
   printf "${RED}Cannot continue installation.${NORMAL}\\n"
   log_fatal "If you are unsure of what went wrong, you may wish to review the log"
-  log_fatal "in $LOGFILE"
+  log_fatal "in ${LOGFILE}"
   exit 1
 }
 
@@ -215,34 +183,35 @@ read_sleep() {
 }
 
 # Start with a clean log
-if [[ -f $LOGFILE ]]; then
-  rm $LOGFILE
+if [[ -f "${LOGFILE}" ]]; then
+  rm "${LOGFILE}"
 fi
 
-# Distro support
+# Architecture support
 ARCH_CHK=$(uname -m)
-if [ ! "${ARCH_CHK}" == 'x86_64' ]; then
-  echo -e "${RED}${BALLOT_X} Error: Sorry, your OS ($ARCH_CHK) is not supported.${NORMAL}"
+if [[ ! "${ARCH_CHK}" == 'x86_64' ]]; then
+  echo -e "${RED}${BALLOT_X}Error: Sorry, your OS ($ARCH_CHK) is not supported.${NORMAL}"
   exit 1;
 fi
 
+## Distro support
 shopt -s nocasematch
 if [[ -f /etc/debian_version ]]; then
   DISTRO=$(cat /etc/issue.net)
 elif [[ -f /etc/redhat-release ]]; then
   DISTRO=$(cat /etc/redhat-release)
 elif [[ -f /etc/os-release ]]; then
-  DISTRO=$(cat < /etc/os-release      \
-            | grep "PRETTY_NAME"      \
-            | sed 's/PRETTY_NAME=//g' \
-            | sed 's/["]//g'          \
-            | awk '{print $1}'        \
+  DISTRO=$( \
+            cat < /etc/os-release       \
+              | grep "PRETTY_NAME"      \
+              | sed 's/PRETTY_NAME=//g' \
+              | sed 's/["]//g'          \
+              | awk '{print $1}'        \
           )
 fi
 
 case "$DISTRO" in
   Debian*|Ubuntu*|LinuxMint*|PureOS*|Pop*|Devuan*)
-    # shellcheck disable=SC2140
     PKGCMD="apt-get -o Dpkg::Progress-Fancy="1" install -qq"
     LSB=lsb-release
     DISTRO_GROUP=Debian
@@ -262,8 +231,12 @@ case "$DISTRO" in
     LSB=lsb-release
     DISTRO_GROUP=Arch
     ;;
-  *) echo -e "${RED}${BALLOT_X} unknown distro: '$DISTRO'${NORMAL}" ; exit 1 ;;
+  *)
+    echo -e "${RED}${BALLOT_X} unknown distro: '$DISTRO'${NORMAL}"
+    exit 1
+    ;;
 esac
+
 if ! lsb_release -si 1>/dev/null 2>&1; then
   echo ""
   echo -e "${RED}${BALLOT_X} Looks like ${LSB} is not installed!${NORMAL}"
@@ -281,9 +254,12 @@ if ! lsb_release -si 1>/dev/null 2>&1; then
     [Nn]* )
       exit 1;
       ;;
-    * ) echo "Enter Y, N, please." ;;
+    * )
+      echo "Enter Y, N, please."
+      ;;
   esac
 fi
+
 SUDO=""
 UPDATE=""
 #UPGRADE=""
@@ -294,34 +270,28 @@ CLEAN=""
 PKGCHK=""
 PGSQL_SERVICE=""
 SYSTEM_CMD=""
+
 shopt -s nocasematch
-if [[ $DISTRO_GROUP == "Debian" ]]; then
+
+## Debian
+if [[ "${DISTRO_GROUP}" == "Debian" ]]; then
   export DEBIAN_FRONTEND=noninteractive
   SUDO="sudo"
-  # shellcheck disable=SC2140
   UPDATE="apt-get -o Dpkg::Progress-Fancy="1" update -qq"
-  # shellcheck disable=SC2140
   # UPGRADE="apt-get -o Dpkg::Progress-Fancy="1" upgrade -qq"
-  # shellcheck disable=SC2140
   INSTALL="apt-get -o Dpkg::Progress-Fancy="1" install -qq"
-  # shellcheck disable=SC2140
   UNINSTALL="apt-get -o Dpkg::Progress-Fancy="1" remove -qq"
-  # shellcheck disable=SC2140
   PURGE="apt-get purge -o Dpkg::Progress-Fancy="1" -qq"
   CLEAN="apt-get clean && apt-get autoremove -qq"
   PKGCHK="dpkg -s"
-  # Pre-install packages
-  PRE_INSTALL_PKGS="apt-transport-https git curl sudo gnupg"
-  # Install packages
-  INSTALL_PKGS="crystal libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev librsvg2-bin postgresql libsqlite3-dev zlib1g-dev libpcre3-dev libevent-dev"
-  #Uninstall packages
-  UNINSTALL_PKGS="crystal libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev librsvg2-bin libsqlite3-dev zlib1g-dev libpcre3-dev libevent-dev"
-  # PostgreSQL Service
-  PGSQL_SERVICE="postgresql"
-  # System cmd
-  SYSTEM_CMD="systemctl"
-  # Postgresql config folder
-  pgsql_config_folder=$(find "/etc/postgresql/" -maxdepth 1 -type d -name "*" | sort -V | tail -1)
+  PRE_INSTALL_PKGS="apt-transport-https git curl sudo gnupg"  # Pre-install packages
+  INSTALL_PKGS="crystal libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev librsvg2-bin postgresql libsqlite3-dev zlib1g-dev libpcre3-dev libevent-dev"  # Install packages
+  UNINSTALL_PKGS="crystal libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev librsvg2-bin libsqlite3-dev zlib1g-dev libpcre3-dev libevent-dev"  #Uninstall packages
+  pgsql_service="postgresql" # postgresql service
+  SYSTEM_CMD="systemctl"     # System cmd
+  pgsql_config_folder=$(find "/etc/postgresql/" -maxdepth 1 -type d -name "*" | sort -V | tail -1)  # Postgresql config folder
+
+## CentOS
 elif [[ $(lsb_release -si) == "CentOS" ]]; then
   SUDO="sudo"
   UPDATE="yum update -q"
@@ -331,18 +301,14 @@ elif [[ $(lsb_release -si) == "CentOS" ]]; then
   PURGE="yum purge -y -q"
   CLEAN="yum clean all -y -q"
   PKGCHK="rpm --quiet --query"
-  # Pre-install packages
-  PRE_INSTALL_PKGS="epel-release git curl sudo dnf-plugins-core"
-  # Install packages
-  INSTALL_PKGS="crystal openssl-devel libxml2-devel libyaml-devel gmp-devel readline-devel librsvg2-tools sqlite-devel postgresql postgresql-server zlib-devel gcc libevent-devel"
-  #Uninstall packages
-  UNINSTALL_PKGS="crystal openssl-devel libxml2-devel libyaml-devel gmp-devel readline-devel librsvg2-tools sqlite-devel zlib-devel gcc libevent-devel"
-  # PostgreSQL Service
-  PGSQL_SERVICE="postgresql"
-  # System cmd
-  SYSTEM_CMD="systemctl"
-  # Postgresql config folder
-  pgsql_config_folder=$(find "/etc/postgresql/" -maxdepth 1 -type d -name "*" | sort -V | tail -1)
+  PRE_INSTALL_PKGS="epel-release git curl sudo dnf-plugins-core"  # Pre-install packages
+  INSTALL_PKGS="crystal openssl-devel libxml2-devel libyaml-devel gmp-devel readline-devel librsvg2-tools sqlite-devel postgresql postgresql-server zlib-devel gcc libevent-devel"  # Install packages
+  UNINSTALL_PKGS="crystal openssl-devel libxml2-devel libyaml-devel gmp-devel readline-devel librsvg2-tools sqlite-devel zlib-devel gcc libevent-devel"  #Uninstall packages
+  PGSQL_SERVICE="postgresql"  # PostgreSQL Service
+  SYSTEM_CMD="systemctl"      # System cmd
+  pgsql_config_folder=$(find "/etc/postgresql/" -maxdepth 1 -type d -name "*" | sort -V | tail -1)  # Postgresql config folder
+
+## Fedora
 elif [[ $(lsb_release -si) == "Fedora" ]]; then
   SUDO="sudo"
   UPDATE="dnf update -q"
@@ -352,19 +318,15 @@ elif [[ $(lsb_release -si) == "Fedora" ]]; then
   PURGE="dnf purge -y -q"
   CLEAN="dnf clean all -y -q"
   PKGCHK="rpm --quiet --query"
-  # Pre-install packages
-  PRE_INSTALL_PKGS="git curl sudo"
-  # Install packages
-  INSTALL_PKGS="crystal openssl-devel libxml2-devel libyaml-devel gmp-devel readline-devel librsvg2-tools sqlite-devel postgresql postgresql-server zlib-devel gcc libevent-devel"
-  #Uninstall packages
-  UNINSTALL_PKGS="crystal openssl-devel libxml2-devel libyaml-devel gmp-devel readline-devel librsvg2-tools sqlite-devel zlib-devel gcc libevent-devel"
-  # PostgreSQL Service
-  PGSQL_SERVICE="postgresql"
-  # System cmd
-  SYSTEM_CMD="systemctl"
-  # Postgresql config folder
-  pgsql_config_folder=$(find "/etc/postgresql/" -maxdepth 1 -type d -name "*" | sort -V | tail -1)
-elif [[ $DISTRO_GROUP == "Arch" ]]; then
+  PRE_INSTALL_PKGS="git curl sudo"  # Pre-install packages
+  INSTALL_PKGS="crystal openssl-devel libxml2-devel libyaml-devel gmp-devel readline-devel librsvg2-tools sqlite-devel postgresql postgresql-server zlib-devel gcc libevent-devel"  # Install packages
+  UNINSTALL_PKGS="crystal openssl-devel libxml2-devel libyaml-devel gmp-devel readline-devel librsvg2-tools sqlite-devel zlib-devel gcc libevent-devel"  #Uninstall packages
+  PGSQL_SERVICE="postgresql" # PostgreSQL Service
+  SYSTEM_CMD="systemctl"     # System cmd
+  pgsql_config_folder=$(find "/etc/postgresql/" -maxdepth 1 -type d -name "*" | sort -V | tail -1)  # Postgresql config folder
+
+## Arch
+elif [[ "${DISTRO_GROUP}" == "Arch" ]]; then
   SUDO="sudo"
   UPDATE="pacman -Syu"
   INSTALL="pacman -S --noconfirm --needed"
@@ -372,18 +334,14 @@ elif [[ $DISTRO_GROUP == "Arch" ]]; then
   PURGE="pacman -Rs"
   CLEAN="pacman -Sc"
   PKGCHK="pacman -Qs"
-  # Pre-install packages
-  PRE_INSTALL_PKGS="git curl sudo"
-  # Install packages
-  INSTALL_PKGS="base-devel shards crystal librsvg postgresql"
-  #Uninstall packages
-  UNINSTALL_PKGS="base-devel shards crystal librsvg"
-  # PostgreSQL Service
-  PGSQL_SERVICE="postgresql"
-  # System cmd
-  SYSTEM_CMD="systemctl"
-  # Postgresql config folder
-  pgsql_config_folder="/var/lib/postgres/data"
+  PRE_INSTALL_PKGS="git curl sudo"                            # Pre-install packages
+  INSTALL_PKGS="base-devel shards crystal librsvg postgresql" # Install packages
+  UNINSTALL_PKGS="base-devel shards crystal librsvg"          #Uninstall packages
+  PGSQL_SERVICE="postgresql"                                  # PostgreSQL Service
+  SYSTEM_CMD="systemctl"                                      # System cmd
+  pgsql_config_folder="/var/lib/postgres/data"                # Postgresql config folder
+
+## Other distros
 else
   echo -e "${RED}${BALLOT_X} Error: Sorry, your OS is not supported.${NORMAL}"
   exit 1;
@@ -399,31 +357,28 @@ fi
 
 # Make sure that the script runs with root permissions
 chk_permissions() {
-
   if [[ $EUID -ne 0 ]]; then
-  	printf "Sorry, you need to run this as root"
+  	printf "${RED}Sorry, you need to run this as root${NORMAL}\n"
   	exit 1
   fi
-
 }
 
 ADD_SWAP_URL=https://raw.githubusercontent.com/tmiland/swap-add/master/swap-add.sh
 
 add_swap() {
-
   if [[ $(command -v 'curl') ]]; then
-    # shellcheck disable=SC1090
+    #shellcheck disable=1090
     source <(curl -sSLf $ADD_SWAP_URL)
   elif [[ $(command -v 'wget') ]]; then
-    # shellcheck disable=SC1090
+    #shellcheck disable=1090
     . <(wget -qO - $ADD_SWAP_URL)
   else
     echo -e "${RED}${BALLOT_X} This script requires curl or wget.\nProcess aborted${NORMAL}"
     exit 0
   fi
   read_sleep 3
-
 }
+
 ## get total free memory size in megabytes(MB)
 free=$(free -mt | grep Total | awk '{print $4}')
 if [[ "$free" -le 2048  ]]; then
@@ -443,7 +398,7 @@ show_status() {
   declare -a services=(
     "invidious"
     "postgresql"
-    )
+  )
   #fi
   declare -a serviceName=(
     "Invidious"
@@ -461,16 +416,13 @@ show_status() {
 
   for i in "${!serviceStatus[@]}"
   do
-
     if [[ "${serviceStatus[$i]}" == "active" ]]; then
       line+="${GREEN}${NORMAL}${serviceName[$i]}: ${GREEN}● ${serviceStatus[$i]}${NORMAL} "
     else
       line+="${serviceName[$i]}: ${RED}▲ ${serviceStatus[$i]}${NORMAL} "
     fi
   done
-
   echo -e "$line"
-
 }
 
 if ( $SYSTEM_CMD -q is-active ${SERVICE_NAME}); then
@@ -478,7 +430,6 @@ if ( $SYSTEM_CMD -q is-active ${SERVICE_NAME}); then
 fi
 
 # BANNERS
-
 # Header
 header() {
   echo -e "${GREEN}\n"
@@ -562,7 +513,6 @@ exit_script() {
 
 # Check Git repo
 chk_git_repo() {
-
   # Check if the folder is a git repo
   if [[ -d "${REPO_DIR}/.git" ]]; then
     echo ""
@@ -574,7 +524,6 @@ chk_git_repo() {
     #indexit
     exit 0
   fi
-
 }
 
 # Set permissions
@@ -587,31 +536,26 @@ set_permissions() {
 update_config() {
   # Update config.yml with new info from user input
   BAKPATH="/home/backup/$USER_NAME/config"
-  # Lets change the default password
   OLDPASS="password: kemal"
-  NEWPASS="password: $PSQLPASS"
-  # Lets change the default database name
+  NEWPASS="password: $PSQLPASS"               # Lets change the default password
   OLDDBNAME="dbname: invidious"
-  NEWDBNAME="dbname: $PSQLDB"
-  # Lets change the default domain
+  NEWDBNAME="dbname: $PSQLDB"                 # Lets change the default database name
   OLDDOMAIN="domain:"
-  NEWDOMAIN="domain: $DOMAIN"
-  # Lets change https_only value
+  NEWDOMAIN="domain: $DOMAIN"                 # Lets change the default domain
   OLDHTTPS="https_only: false"
-  NEWHTTPS="https_only: $HTTPS_ONLY"
-  # Lets change external_port
+  NEWHTTPS="https_only: $HTTPS_ONLY"          # Lets change https_only value
   OLDEXTERNAL="external_port:"
-  NEWEXTERNAL="external_port: $EXTERNAL_PORT"
+  NEWEXTERNAL="external_port: $EXTERNAL_PORT" # Lets change external_port
   DPATH="${IN_CONFIG}"
   BPATH="$BAKPATH"
   TFILE="/tmp/config.yml"
-  [ ! -d $BPATH ] && mkdir -p $BPATH || :
+  [[ ! -d $BPATH ]] && mkdir -p $BPATH || :
+
   for f in $DPATH
   do
-    if [ -f $f -a -r $f ]; then
+    if [[ -f $f && -r $f ]]; then
       /bin/cp -f $f $BPATH
-      # Add external_port: to config on line 13
-      sed -i "11i\external_port:" "$f" > $TFILE
+      sed -i "11i\external_port:" "$f" > $TFILE   # Add external_port: to config on line 13
       sed -i "12i\check_tables: true" "$f" > $TFILE
       sed -i "13i\port: $PORT" "$f" > $TFILE
       sed -i "14i\host_binding: $IP" "$f" > $TFILE
@@ -625,8 +569,8 @@ update_config() {
     fi
   done
 
-  if [[ -e $TFILE ]]; then
-    /bin/rm $TFILE >>"${RUN_LOG}" 2>&1
+  if [[ -e "${TFILE}" ]]; then
+    /bin/rm "${TFILE}" >>"${RUN_LOG}" 2>&1
   fi
   # Done updating config.yml with new info!
   # Source: https://www.cyberciti.biz/faq/unix-linux-replace-string-words-in-many-files/
@@ -637,17 +581,15 @@ systemd_install() {
 
   # Setup Systemd Service
   shopt -s nocasematch
-  if [[ $DISTRO_GROUP == "RHEL" ]]; then
+  if [[ "${DISTRO_GROUP}" == "RHEL" ]]; then
     cp ${REPO_DIR}/${SERVICE_NAME} /etc/systemd/system/${SERVICE_NAME} >>"${RUN_LOG}" 2>&1
   else
     cp ${REPO_DIR}/${SERVICE_NAME} /lib/systemd/system/${SERVICE_NAME} >>"${RUN_LOG}" 2>&1
   fi
-  # Enable invidious start at boot
-  ${SUDO} $SYSTEM_CMD enable ${SERVICE_NAME} >>"${RUN_LOG}" 2>&1
-  # Reload Systemd
-  ${SUDO} $SYSTEM_CMD daemon-reload >>"${RUN_LOG}" 2>&1
-  # Restart Invidious
-  ${SUDO} $SYSTEM_CMD start ${SERVICE_NAME} >>"${RUN_LOG}" 2>&1
+
+  ${SUDO} $SYSTEM_CMD enable ${SERVICE_NAME} >>"${RUN_LOG}" 2>&1  # Enable invidious start at boot
+  ${SUDO} $SYSTEM_CMD daemon-reload >>"${RUN_LOG}" 2>&1  # Reload Systemd
+  ${SUDO} $SYSTEM_CMD start ${SERVICE_NAME} >>"${RUN_LOG}" 2>&1  # Restart Invidious
   if ( $SYSTEM_CMD -q is-active ${SERVICE_NAME})
   then
     ${SUDO} $SYSTEM_CMD status ${SERVICE_NAME} --no-pager >>"${RUN_LOG}" 2>&1
@@ -656,12 +598,10 @@ systemd_install() {
     ${SUDO} journalctl -u ${SERVICE_NAME} >>"${RUN_LOG}" 2>&1
     read_sleep 5
   fi
-
 }
 
 logrotate_install() {
-
-  if [ -d /etc/logrotate.d ]; then
+  if [[ -d /etc/logrotate.d ]]; then
     echo "Adding logrotate configuration..."
     echo "/home/invidious/invidious/invidious.log {
     rotate 4
@@ -673,36 +613,32 @@ logrotate_install() {
 }" | ${SUDO} tee /etc/logrotate.d/invidious.logrotate >>"${RUN_LOG}" 2>&1
     chmod 0644 /etc/logrotate.d/invidious.logrotate >>"${RUN_LOG}" 2>&1
   fi
-
 }
 
 # Get Crystal
 get_crystal() {
-
   shopt -s nocasematch
-  if [[ $DISTRO_GROUP == "Debian" ]]; then
+  if [[ "${DISTRO_GROUP}" == "Debian" ]]; then
     if [[ ! -e /etc/apt/sources.list.d/crystal.list ]]; then
       curl -fsSL https://crystal-lang.org/install.sh | ${SUDO} bash >>"${RUN_LOG}" 2>&1
     fi
-  elif [[ $DISTRO_GROUP == "RHEL" ]]; then
+  elif [[ "${DISTRO_GROUP}" == "RHEL" ]]; then
     if [[ ! -e /etc/yum.repos.d/crystal.repo ]]; then
       curl -fsSL https://crystal-lang.org/install.sh | ${SUDO} bash >>"${RUN_LOG}" 2>&1
     fi
   elif [[ $(lsb_release -si) == "Darwin" ]]; then
     exit 1;
-  elif [[ $DISTRO_GROUP == "Arch" ]]; then
+  elif [[ "${DISTRO_GROUP}" == "Arch" ]]; then
     echo "Arch/Manjaro Linux... Skipping manual crystal install" >>"${RUN_LOG}" 2>&1
   else
     log_fatal "Error: Sorry, your OS is not supported."
     exit 1;
   fi
-
 }
 
 # Create new config.yml
 create_config() {
-
-if [ ! -f "$IN_CONFIG" ]; then
+if [[ ! -f "$IN_CONFIG" ]]; then
   echo "channel_threads: 1
 feed_threads: 1
 db:
@@ -715,7 +651,6 @@ full_refresh: false
 https_only: false
 domain:" | ${SUDO} tee ${IN_CONFIG} >>"${RUN_LOG}" 2>&1
 fi
-
 }
 
 # Backup config file
@@ -742,48 +677,49 @@ get_dbname() {
 }
 
 uninstall_invidious() {
-# Set default uninstallation parameters
-RM_PostgreSQLDB=${RM_PostgreSQLDB:-y}
-RM_RE_PGSQLDB=${RM_RE_PGSQLDB:-n}
-RM_PACKAGES=${RM_PACKAGES:-n}
-RM_PURGE=${RM_PURGE:-n}
-RM_FILES=${RM_FILES:-y}
-RM_USER=${RM_USER:-n}
-# Set db backup path
-PGSQLDB_BAK_PATH="/home/backup/$USER_NAME"
-# Get dbname from config.yml
-RM_PSQLDB=$(get_dbname "${IN_CONFIG}")
+  # Set default uninstallation parameters
+  RM_PostgreSQLDB=${RM_PostgreSQLDB:-y}
+  RM_RE_PGSQLDB=${RM_RE_PGSQLDB:-n}
+  RM_PACKAGES=${RM_PACKAGES:-n}
+  RM_PURGE=${RM_PURGE:-n}
+  RM_FILES=${RM_FILES:-y}
+  RM_USER=${RM_USER:-n}
+  PGSQLDB_BAK_PATH="/home/backup/$USER_NAME"  # Set db backup path
+  RM_PSQLDB=$(get_dbname "${IN_CONFIG}")  # Get dbname from config.yml
 
-read -p "Express uninstall ? [y/n]: " EXPRESS_UNINSTALL
+  read -p "Express uninstall ? [y/n]: " EXPRESS_UNINSTALL
+  if [[ ! $EXPRESS_UNINSTALL =  "y" ]]; then
+    echo ""
+    read -e -i "$RM_PostgreSQLDB" -p "       Remove database for Invidious ? [y/n]: " RM_PostgreSQLDB
+    if [[ $RM_PostgreSQLDB =  "y" ]]; then
+      echo -e "       ${YELLOW}${WARNING} (( A backup will be placed in ${ARROW} $PGSQLDB_BAK_PATH ))${NORMAL}"
+      echo -e "       Your Invidious database name: $RM_PSQLDB"
+    fi
 
-if [[ ! $EXPRESS_UNINSTALL =  "y" ]]; then
-  echo ""
-  read -e -i "$RM_PostgreSQLDB" -p "       Remove database for Invidious ? [y/n]: " RM_PostgreSQLDB
-  if [[ $RM_PostgreSQLDB =  "y" ]]; then
-    echo -e "       ${YELLOW}${WARNING} (( A backup will be placed in ${ARROW} $PGSQLDB_BAK_PATH ))${NORMAL}"
-    echo -e "       Your Invidious database name: $RM_PSQLDB"
+    if [[ $RM_PostgreSQLDB =  "y" ]]; then
+      echo -e "       ${YELLOW}${WARNING} (( If yes, only data will be dropped ))${NORMAL}"
+      read -e -i "$RM_RE_PGSQLDB" -p "       Do you intend to reinstall?: " RM_RE_PGSQLDB
+    fi
+
+    read -e -i "$RM_PACKAGES" -p "       Remove Packages ? [y/n]: " RM_PACKAGES
+    if [[ $RM_PACKAGES = "y" ]]; then
+      read -e -i "$RM_PURGE" -p "       Purge Package configuration files ? [y/n]: " RM_PURGE
+    fi
+
+    echo -e "       ${YELLOW}${WARNING} (( This option will remove ${ARROW} ${REPO_DIR} ))${NORMAL}"
+    read -e -i "$RM_FILES" -p "       Remove files ? [y/n]: " RM_FILES
+    if [[ "$RM_FILES" = "y" ]]; then
+      echo -e "       ${RED}${WARNING} (( This option will remove ${ARROW} $USER_DIR ))${NORMAL}"
+      echo -e "       ${YELLOW}${WARNING} (( Not needed for reinstall ))${NORMAL}"
+      read -e -i "$RM_USER" -p "       Remove user ? [y/n]: " RM_USER
+    fi
+    echo ""
+    echo -e "${GREEN}${ARROW} Invidious is ready to be uninstalled${NORMAL}"
+    echo ""
+    read -n1 -r -p "press any key to continue or Ctrl+C to cancel..."
+    echo ""
   fi
-  if [[ $RM_PostgreSQLDB =  "y" ]]; then
-    echo -e "       ${YELLOW}${WARNING} (( If yes, only data will be dropped ))${NORMAL}"
-    read -e -i "$RM_RE_PGSQLDB" -p "       Do you intend to reinstall?: " RM_RE_PGSQLDB
-  fi
-  read -e -i "$RM_PACKAGES" -p "       Remove Packages ? [y/n]: " RM_PACKAGES
-  if [[ $RM_PACKAGES = "y" ]]; then
-    read -e -i "$RM_PURGE" -p "       Purge Package configuration files ? [y/n]: " RM_PURGE
-  fi
-  echo -e "       ${YELLOW}${WARNING} (( This option will remove ${ARROW} ${REPO_DIR} ))${NORMAL}"
-  read -e -i "$RM_FILES" -p "       Remove files ? [y/n]: " RM_FILES
-  if [[ "$RM_FILES" = "y" ]]; then
-    echo -e "       ${RED}${WARNING} (( This option will remove ${ARROW} $USER_DIR ))${NORMAL}"
-    echo -e "       ${YELLOW}${WARNING} (( Not needed for reinstall ))${NORMAL}"
-    read -e -i "$RM_USER" -p "       Remove user ? [y/n]: " RM_USER
-  fi
-  echo ""
-  echo -e "${GREEN}${ARROW} Invidious is ready to be uninstalled${NORMAL}"
-  echo ""
-  read -n1 -r -p "press any key to continue or Ctrl+C to cancel..."
-  echo ""
-fi
+
   # Remove PostgreSQL database if user ANSWER is yes
   if [[ "$RM_PostgreSQLDB" = 'y' ]]; then
     # Stop and disable invidious
@@ -791,6 +727,7 @@ fi
     read_sleep 1
     ${SUDO} $SYSTEM_CMD restart ${PGSQL_SERVICE}
     read_sleep 1
+
     # If directory is not created
     if [[ ! -d $PGSQLDB_BAK_PATH ]]; then
       echo -e "${YELLOW}${ARROW} Backup Folder Not Found, adding folder${NORMAL}"
@@ -800,7 +737,6 @@ fi
     echo ""
     echo -e "${GREEN}${ARROW} Running database backup${NORMAL}"
     echo ""
-
     ${SUDO} -i -u postgres pg_dump ${RM_PSQLDB} > ${PGSQLDB_BAK_PATH}/${RM_PSQLDB}.sql
     read_sleep 2
     ${SUDO} chown -R 1000:1000 "/home/backup"
@@ -830,6 +766,7 @@ fi
 
   # Reload Systemd
   ${SUDO} $SYSTEM_CMD daemon-reload
+
   # Remove packages installed during installation
   if [[ "$RM_PACKAGES" = 'y' ]]; then
     echo ""
@@ -857,11 +794,12 @@ fi
     echo ""
     echo -e "${YELLOW}${ARROW} Removing invidious files and modules files.${NORMAL}"
     echo ""
-    if [[ $DISTRO_GROUP == "Debian" ]]; then
+
+    if [[ "${DISTRO_GROUP}" == "Debian" ]]; then
       rm -r \
         /lib/systemd/system/${SERVICE_NAME} \
         /etc/apt/sources.list.d/crystal.list
-    elif [[ $DISTRO_GROUP == "RHEL" ]]; then
+    elif [[ "${DISTRO_GROUP}" == "RHEL" ]]; then
       rm -r \
         /usr/lib/systemd/system/${SERVICE_NAME} \
         /etc/yum.repos.d/crystal.repo
@@ -875,7 +813,6 @@ fi
         ${PURGE} $i 2> /dev/null
       done
     fi
-
     echo ""
     echo -e "${YELLOW}${ARROW} cleaning up.${NORMAL}"
     echo ""
@@ -896,30 +833,30 @@ fi
   # Remove user and settings
   if [[ "$RM_USER" = 'y' ]]; then
     # Stop and disable invidious
-    ${SUDO} $SYSTEM_CMD stop ${SERVICE_NAME}
-    read_sleep 1
-    ${SUDO} $SYSTEM_CMD restart ${PGSQL_SERVICE}
-    read_sleep 1
-    ${SUDO} $SYSTEM_CMD daemon-reload
-    read_sleep 1
+    ${SUDO} $SYSTEM_CMD stop ${SERVICE_NAME}; read_sleep 1
+    ${SUDO} $SYSTEM_CMD restart ${PGSQL_SERVICE}; read_sleep 1
+    ${SUDO} $SYSTEM_CMD daemon-reload; read_sleep 1
     grep $USER_NAME /etc/passwd >/dev/null 2>&1
 
-    if [ $? -eq 0 ] ; then
+    if [[ $? -eq 0 ]]; then
       echo ""
       echo -e "${YELLOW}${ARROW} User $USER_NAME Found, removing user and files${NORMAL}"
       echo ""
+
       shopt -s nocasematch
-      if [[ $DISTRO_GROUP == "Debian" ]]; then
+      if [[ "${DISTRO_GROUP}" == "Debian" ]]; then
         ${SUDO} deluser --remove-home $USER_NAME
       fi
-      if [[ $DISTRO_GROUP == "RHEL" ]]; then
+      if [[ "${DISTRO_GROUP}" == "RHEL" ]]; then
         /usr/sbin/userdel -r $USER_NAME
       fi
     fi
   fi
-  if [ -d /etc/logrotate.d ]; then
+
+  if [[ -d /etc/logrotate.d ]]; then
     rm /etc/logrotate.d/invidious.logrotate
   fi
+
   # We're done !
   echo ""
   echo -e "${GREEN}${CHECK} Un-installation done.${NORMAL}"
@@ -929,16 +866,16 @@ fi
   exit 0
 }
 
-if [ "$mode" = "uninstall" ]; then
+if [[ "$mode" = "uninstall" ]]; then
   uninstall_invidious
 fi
 
 install_invidious() {
-
   chk_git_repo
-if [ "$BANNERS" = "1" ]; then
-  show_preinstall_banner
-fi
+
+  if [[ "$BANNERS" = "1" ]]; then
+    show_preinstall_banner
+  fi
 
   case $HTTPS_ONLY in
     [Yy]* )
@@ -952,7 +889,7 @@ fi
   esac
 
   PSQLDB=$(printf '%s\n' "$PSQLDB" | LC_ALL=C tr '[:upper:]' '[:lower:]')
-  log_info "Started installation log in $LOGFILE"
+  log_info "Started installation log in ${LOGFILE}"
   echo
   printf "${YELLOW}▣${CYAN}□□□${NORMAL} Phase ${YELLOW}1${NORMAL} of ${GREEN}4${NORMAL}: Setup packages\\n"
   log_info "Install options: "
@@ -960,7 +897,8 @@ fi
   log_info " ${GREEN}${CHECK}${NORMAL} ${YELLOW}domain${NORMAL}        : ${BBLUE}$DOMAIN${NORMAL}"
   log_info " ${GREEN}${CHECK}${NORMAL} ${YELLOW}ip address${NORMAL}    : ${BBLUE}$IP${NORMAL}"
   log_info " ${GREEN}${CHECK}${NORMAL} ${YELLOW}port${NORMAL}          : ${BBLUE}$PORT${NORMAL}"
-  if [ -n "$EXTERNAL_PORT" ]; then
+
+  if [[ -n "$EXTERNAL_PORT" ]]; then
     log_info " ${GREEN}${CHECK}${NORMAL} ${YELLOW}external port${NORMAL} : ${BBLUE}$EXTERNAL_PORT${NORMAL}"
   fi
 
@@ -968,15 +906,14 @@ fi
   log_info " ${GREEN}${CHECK}${NORMAL} ${YELLOW}dbpass${NORMAL}        : ${BBLUE}$PSQLPASS${NORMAL}"
   log_info " ${GREEN}${CHECK}${NORMAL} ${YELLOW}https only${NORMAL}    : ${BBLUE}$HTTPS_ONLY${NORMAL}"
 
-  if [ -n "$ADMINS" ]; then
+  if [[ -n "$ADMINS" ]]; then
     log_info " ${GREEN}${CHECK}${NORMAL} ${YELLOW}admins${NORMAL}        : ${BBLUE}$ADMINS${NORMAL}"
   fi
 
-  if [ -n "$CAPTCHA_KEY" ]; then
+  if [[ -n "$CAPTCHA_KEY" ]]; then
     log_info " ${GREEN}${CHECK}${NORMAL} ${YELLOW}captcha key${NORMAL}   : ${BBLUE}$CAPTCHA_KEY${NORMAL}"
   fi
   echo
-  # echo ""
 
   # Setup Dependencies
   log_debug "Configuring package manager for ${DISTRO_GROUP} .."
@@ -985,7 +922,7 @@ fi
     run_ok "${UPDATE}" "Updating package repo"
     for i in $PRE_INSTALL_PKGS; do
       log_debug "Installing pre-install packages $i"
-      # shellcheck disable=SC2086
+      #shellcheck disable=2086
       ${INSTALL} $i >>"${RUN_LOG}" 2>&1
     done
   fi
@@ -998,7 +935,7 @@ fi
     run_ok "${SUDO} ${UPDATE}" "Updating package repo"
     for i in $INSTALL_PKGS; do
       log_debug "Installing required packages $i"
-      # shellcheck disable=SC2086
+      #shellcheck disable=2086
       ${SUDO} ${INSTALL} ${i} >>"${RUN_LOG}" 2>&1
     done
   fi
@@ -1021,7 +958,7 @@ fi
   printf "${GREEN}▣${YELLOW}▣${CYAN}□□${NORMAL} Phase ${YELLOW}2${NORMAL} of ${GREEN}4${NORMAL}: Setup Repository\\n"
   # https://stackoverflow.com/a/51894266
   # grep $USER_NAME /etc/passwd 1>/dev/null 2>&1
-  # if [ ! $? -eq 0 ] ; then
+  # if [[ ! $? -eq 0 ] ; then
     #echo -e "${YELLOW}${ARROW} User $USER_NAME Not Found, adding user${NORMAL}"
   if ! id -u "$USER_NAME" 1>/dev/null 2>&1; then
     log_debug "Checking if $USER_NAME exists"
@@ -1038,7 +975,7 @@ fi
   log_debug "Setting folder permissions"
   run_ok "set_permissions" "Setting folder permissions"
 
-  if [ -d $USER_DIR ]; then
+  if [[ -d $USER_DIR ]]; then
     (
       cd $USER_DIR >>"${RUN_LOG}" 2>&1 || exit 1
 
@@ -1049,7 +986,7 @@ fi
     )
   fi
 
-  if [ -d $REPO_DIR ]; then
+  if [[ -d $REPO_DIR ]]; then
     (
       cd $REPO_DIR >>"${RUN_LOG}" 2>&1 || exit 1
 
@@ -1062,20 +999,22 @@ fi
       cd - 1>/dev/null 2>&1 || exit 1
     )
   fi
-
   echo
+
   # Setup Repository
   log_debug "Phase 3 of 4: Database Configuration"
   printf "${GREEN}▣▣${YELLOW}▣${CYAN}□${NORMAL} Phase ${YELLOW}3${NORMAL} of ${GREEN}4${NORMAL}: Setup Database\\n"
 
-  if [[ $DISTRO_GROUP == "RHEL" ]]; then
+  if [[ "${DISTRO_GROUP}" == "RHEL" ]]; then
     if ! ${PKGCHK} ${PGSQL_SERVICE} 1>/dev/null 2>&1; then
+
       if [[ $(lsb_release -si) == "CentOS" ]]; then
         ${SUDO} yum config-manager --set-enabled powertools >>"${RUN_LOG}" 2>&1
         ${SUDO} dnf --enablerepo=powertools install libyaml-devel >>"${RUN_LOG}" 2>&1
       fi
 
       if [[ -d /var/lib/pgsql/data ]]; then
+
         if [[ -d /var/lib/pgsql/data.bak ]]; then
           ${SUDO} rm -rf /var/lib/pgsql/data.bak >>"${RUN_LOG}" 2>&1
         fi
@@ -1084,11 +1023,13 @@ fi
       else
         ${SUDO} /usr/bin/postgresql-setup --initdb >>"${RUN_LOG}" 2>&1
       fi
+
       ${SUDO} chmod 775 /var/lib/pgsql/data/postgresql.conf >>"${RUN_LOG}" 2>&1
       ${SUDO} chmod 775 /var/lib/pgsql/data/pg_hba.conf >>"${RUN_LOG}" 2>&1
       read_sleep 1
       ${SUDO} sed -i "s/#port = 5432/port = 5432/g" /var/lib/pgsql/data/postgresql.conf >>"${RUN_LOG}" 2>&1
       cp -rp /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf.bak >>"${RUN_LOG}" 2>&1
+
       echo "# Database administrative login by Unix domain socket
 local   all             postgres                                peer
 
@@ -1105,16 +1046,18 @@ host    all             all             ::1/128                 md5
 local   replication     all                                     peer
 host    replication     all             127.0.0.1/32            md5
 host    replication     all             ::1/128                 md5" | ${SUDO} tee /var/lib/pgsql/data/pg_hba.conf >>"${RUN_LOG}" 2>&1
+
       ${SUDO} chmod 600 /var/lib/pgsql/data/postgresql.conf >>"${RUN_LOG}" 2>&1
       ${SUDO} chmod 600 /var/lib/pgsql/data/pg_hba.conf >>"${RUN_LOG}" 2>&1
     fi
   fi
 
-  if [[ $DISTRO_GROUP == "Arch" ]]; then
+  if [[ "${DISTRO_GROUP}" == "Arch" ]]; then
     if [[ ! -d /var/lib/postgres/data ]]; then
       log_debug "Adding ${pgsql_config_folder}"
       run_ok "${SUDO} mkdir ${pgsql_config_folder}"
     fi
+
     if [[ -d ${pgsql_config_folder} ]]; then
       log_debug "Adding ${pgsql_config_folder}"
       su - postgres -c "initdb --locale en_US.UTF-8 -D '/var/lib/postgres/data'" >>"${RUN_LOG}" 2>&1
@@ -1132,6 +1075,7 @@ host    replication     all             ::1/128                 md5" | ${SUDO} t
   log_debug "Restarting ${PGSQL_SERVICE}"
   run_ok "${SUDO} $SYSTEM_CMD restart ${PGSQL_SERVICE}" "Restarting ${PGSQL_SERVICE}"
   read_sleep 1
+
   # Create users and set privileges
   log_debug "Creating user kemal with password $PSQLPASS"
   ${SUDO} -u postgres psql -c "CREATE USER kemal WITH PASSWORD '$PSQLPASS';" >>"${RUN_LOG}" 2>&1
@@ -1149,7 +1093,6 @@ host    replication     all             ::1/128                 md5" | ${SUDO} t
   fi
 
   log_success "Database Setup Finished"
-
   echo
   log_debug "Phase 4 of 4: Invidious Configuration"
   printf "${GREEN}▣▣▣${YELLOW}▣${NORMAL} Phase ${YELLOW}4${NORMAL} of ${GREEN}4${NORMAL}: Setup Invidious\\n"
@@ -1175,10 +1118,10 @@ host    replication     all             ::1/128                 md5" | ${SUDO} t
     )
   fi
 
-  if [[ $DISTRO_GROUP == "RHEL" ]]; then
+  if [[ "${DISTRO_GROUP}" == "RHEL" ]]; then
     # Set SELinux to permissive on RHEL
     #${SUDO} setenforce 0 >>"${RUN_LOG}" 2>&1
-    if [ -x /usr/sbin/setenforce ]; then
+    if [[ -x /usr/sbin/setenforce ]]; then
       log_debug "Disabling SELinux during installation .."
       if ${SUDO} /usr/sbin/setenforce 0 1>/dev/null 2>&1; then
         log_debug " setenforce 0 succeeded"
@@ -1201,7 +1144,7 @@ host    replication     all             ::1/128                 md5" | ${SUDO} t
 
 # Start Script
   chk_permissions
-if [ "$BANNERS" = "1" ]; then
+if [[ "$BANNERS" = "1" ]]; then
   show_banner
 fi
 # Install Invidious
@@ -1210,9 +1153,10 @@ fi
     errorlist="${errorlist}  ${YELLOW}◉${NORMAL} Invidious installation returned an error.\\n"
     errors=$((errors + 1))
   fi
-  if [ $errors -eq "0" ]; then
+
+  if [[ $errors -eq "0" ]]; then
     read_sleep 5
-    if [ "$BANNERS" = "1" ]; then
+    if [[ "$BANNERS" = "1" ]]; then
       show_install_banner
     fi
     read_sleep 5
@@ -1222,5 +1166,6 @@ fi
     echo
     printf "${errorlist}"
   fi
+
   exit_script
   exit
