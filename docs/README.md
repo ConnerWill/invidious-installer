@@ -36,7 +36,7 @@ curl -sSL "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main
 ```
 
 <details>
-  <summary>Download with wget and pipe to bash</summary>
+  <summary>Download with wget instead</summary>
 <br>
  
 > Download with wget and run the installation script with a default  install with a default configuration which runs on **localhost:3000** *(http://127.0.0.1:3000)*
