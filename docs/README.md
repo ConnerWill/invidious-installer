@@ -29,7 +29,7 @@ Version 2.0.0 is completely re-written and might be sourced in the future
 
 ## Quick Installation
 
-Install with default options to be used on localhost
+Install with a default configuration which runs on localhost
 
 ```shell
 curl -sSL "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main/invidious_installer.sh" | bash || exit 0
