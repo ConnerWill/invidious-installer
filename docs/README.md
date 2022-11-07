@@ -13,14 +13,6 @@
 
 ---
 
-```
-╔════════════════════════════════════════════╗
-║              Invidious Installer.sh               ║
-║       Automatic install script for Invidious      ║
-║              Maintained by @tmiland               ║
-╚════════════════════════════════════════════╝
-```
-
 
 # Overview
 
@@ -142,3 +134,17 @@ Sign up for web hosting using this link, and receive $100 in credit over 60 days
 [![MIT License Image](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/220px-MIT_logo.svg.png)](https://github.com/tmiland/invidious-installer/blob/master/LICENSE)
 
 [MIT License](https://github.com/tmiland/invidious-installer/blob/master/LICENSE)
+
+
+<div align="center">
+
+```
+╔════════════════════════════════════════════╗
+║              Invidious Installer.sh               ║
+║       Automatic install script for Invidious      ║
+║              Maintained by @tmiland               ║
+╚════════════════════════════════════════════╝
+```
+
+</div>
+
