@@ -107,8 +107,6 @@ sudo passwd root
 This is by no means a complete list of options; to see all configuration options, view the example config that is included in the main Invidious repository
 : ***[config.example.yml](https://raw.githubusercontent.com/iv-org/invidious/master/config/config.example.yml)***
 
-> Configuration options with empty values are unset by default
-
 ---
 
 IP
@@ -136,6 +134,8 @@ SWAP_OPTIONS
 : n
 
 ---
+
+> Configuration options with empty values are unset by default
 
 ### To keep Invidious up-to-date: [Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)
 
