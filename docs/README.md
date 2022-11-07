@@ -102,6 +102,35 @@ If root password is not set, type:
 sudo passwd root
 ```
 
+### Configuration
+
+Configuration options with empty values are unset by default
+
+IP
+: localhost
+
+PORT
+: 3000
+
+EXTERNAL_PORT
+: 
+
+DOMAIN
+: 
+
+HTTPS_ONLY
+: n
+
+PSQLDB
+: invidious
+
+ADMINS
+: 
+
+SWAP_OPTIONS
+: n
+
+
 ### To keep Invidious up-to-date: [Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)
 
 ## Testing
