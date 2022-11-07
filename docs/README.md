@@ -102,7 +102,10 @@ If root password is not set, type:
 sudo passwd root
 ```
 
-### Configuration
+Keep Invidious up-to-date with
+: ***[Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)***
+
+### Configuration Options
 
 This is by no means a complete list of options; to see all configuration options, view the example config that is included in the main Invidious repository
 : ***[config.example.yml](https://raw.githubusercontent.com/iv-org/invidious/master/config/config.example.yml)***
@@ -137,9 +140,7 @@ SWAP_OPTIONS
 
 ---
 
-### To keep Invidious up-to-date: [Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)
-
-## Testing
+## Supported Operating Systems
 
 Tested and working on:
 
