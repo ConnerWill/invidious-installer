@@ -20,32 +20,33 @@ This script is just the install option in [Invidious-Updater](https://github.com
 
 ## Installation
 
-
 ### Download the script:
 
 Quick install with default options for localhost:
 
 With Curl:
-```bash
-curl -sSL https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh | bash || exit 0
+```shell
+curl -sSL "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh" | bash || exit 0
 ```
+
 With Wget:
-```bash
-wget -qO - https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh | bash || exit 0
+```shell
+wget -qO - "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh" | bash || exit 0
 ```
 
 With custom options:
-```bash
-curl -sSL https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh
+```shell
+curl -sSL "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh"
 ```
+
 Set execute permission:
-```bash
+```shell
 chmod +x invidious_installer.sh
 ```
 
 ### Install with default options to run on localhost:
 
-```bash
+```console
 DOMAIN= \
 IP=localhost \
 PORT=3000 \
@@ -59,7 +60,7 @@ SWAP_OPTIONS=n \
 
 ### Install with options to run on HTTPS site:
 
-```bash
+```console
 DOMAIN=domain.com \
 IP=123.45.67.89 \
 PORT=3000 \
