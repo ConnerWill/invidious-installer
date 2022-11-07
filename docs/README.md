@@ -16,7 +16,8 @@
 
 # Overview
 
-This script is just the install option in [Invidious-Updater](https://github.com/tmiland/Invidious-Updater) - Version 2.0.0 is completely re-written and might be sourced in the future
+This script is just the install option in [Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)
+: Version 2.0.0 is completely re-written and might be sourced in the future
 
 # Installation
 
@@ -25,14 +26,14 @@ This script is just the install option in [Invidious-Updater](https://github.com
 Install with default options to be used on localhost
 
 ```shell
-curl -sSL "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh" | bash || exit 0
+curl -sSL "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main/invidious_installer.sh" | bash || exit 0
 ```
 
 <details>
   <summary>Download with wget and pipe to bash</summary>
 
 ```shell
-wget -qO - "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh" | bash || exit 0
+wget -qO - "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main/invidious_installer.sh" | bash || exit 0
 ```
   
 </details>
@@ -40,7 +41,7 @@ wget -qO - "https://github.com/tmiland/invidious-installer/raw/main/invidious_in
 ## Customized Installation
 
 ```shell
-curl -sSL "https://github.com/tmiland/invidious-installer/raw/main/invidious_installer.sh"
+curl -sSL "https://raw.githubusercontent.com/ConnerWill/invidious-installer/main/invidious_installer.sh"
 chmod +x invidious_installer.sh
 ```
 
@@ -77,7 +78,7 @@ SWAP_OPTIONS=n \
 - For verbose output, use [ -v ] argument
 - Use a custom invidious repo/fork with [ -r | --repo user/invidious ]
 - installation log in invidious_installer.log
-- [./src/slib.sh](https://github.com/tmiland/invidious-installer/blob/main/src/slib.sh) function script is sourced remotely if not found locally
+- [./src/slib.sh](/src/slib.sh) function script is sourced remotely if not found locally
   - This script is a combination of functions for spinners, colors and logging
     - Source: Spinner: [swelljoe/spinner](https://github.com/swelljoe/spinner)
     - Source: Run ok: [swelljoe/run_ok](https://github.com/swelljoe/run_ok)
@@ -92,7 +93,7 @@ If root password is not set, type:
 sudo passwd root
 ```
 
-### To keep Invidious up-to-date: [Invidious-Updater](https://github.com/tmiland/Invidious-Updater)
+### To keep Invidious up-to-date: [Invidious-Updater](https://github.com/ConnerWill/Invidious-Updater)
 
 ## Testing
 
