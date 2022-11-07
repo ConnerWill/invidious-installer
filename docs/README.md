@@ -165,25 +165,25 @@ Tested and working on:
 - [Bug report](https://github.com/tmiland/Invidious-Updater/issues/new?assignees=tmiland&labels=bug&template=bug_report.md&title=Bug-report:)
 - [Feature request](https://github.com/tmiland/Invidious-Updater/issues/new?assignees=tmiland&labels=enhancement&template=feature_request.md&title=Feature-request:)
 
-## Donations
+## Donations ₿
 
 **tmiland**
 
-[**BTC**]
+**BTC**
 : `33mjmoPxqfXnWNsvy8gvMZrrcG3gEa3YDM`
 
-[**[PayPal](https://paypal.me/milanddata)**]
+**[PayPal](https://paypal.me/milanddata)**
 
-[**[Buy Me a Coffee](https://www.buymeacoffee.com/tmiland)**]
+**[Buy Me a Coffee](https://www.buymeacoffee.com/tmiland)**
 
 ---
 
 **ConnerWill**
 
-[**XMR**]
+**XMR**
 : `86tE67soBqFb5fxNGgC4HLdwZXebP42ewfBwfKyMDKvFbgA7T8p4g4T5BBNA9LNbwaVafup973w41PdvCS7bbj6gTNQpCh1`
 
-[**BTC**]
+**BTC**
 : `bc1qpg5d69n2knsete7vw7f2vqpkg4a0faq9rc6se0`
 
 ---
