@@ -2,7 +2,6 @@
 ls
 #shellcheck disable=2059,1091,2166,2015,2129,2221,2222,2140,2046,2034
 #shellcheck source=./src/slib.sh
-
 ## Author: Tommy Miland (@tmiland) - Copyright (c) 2022
 
 ######################################################################
